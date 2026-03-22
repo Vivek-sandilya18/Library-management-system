@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${title}">Welcome Page</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+		crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" th:href="@{/form.css}">
+</head>
+
+<body>
+	<div class="mycontainer text-center mt-5">
+		<h1>Please Login for Library</h1>
+
+		<div class="row justify-content-center mt-4">
+			<div class="col-md-4">
+
+				<form id="userForm" th:action="@{/}" th:object="${user}" method="post" class="border p-4 rounded shadow bg-light">
+
+					<div class="mb-3">
+						<label class="form-label" for="user_id">User Id</label>
+						<input type="number" class="form-control" id="user_id" th:field="*{user_id}" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="name" class="form-label">User Name</label>
+						<input type="text" class="form-control" id="name" th:field="*{name}" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="email" class="form-label">User Email</label>
+						<input type="email" class="form-control" id="email" th:field="*{email}" required>
+					</div>
+
+			
+					<div class="mb-3">
+						<button type="submit" class="btn btn-primary w-100">Sign In</button>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	
+	<script>
+		document.getElementById("userForm").addEventListener("submit", function (event) {
+			const userId = document.getElementById("user_id").value.trim();
+			const name = document.getElementById("name").value.trim();
+			const email = document.getElementById("email").value.trim();
+
+			if (userId === "" || name === "" || email === "") {
+				event.preventDefault(); // stop form submission
+				alert("Please fill in all fields before continuing.");
+			}
+		});
+	</script>
+</body>
+</html>
